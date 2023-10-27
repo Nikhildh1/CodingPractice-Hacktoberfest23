@@ -1,0 +1,22 @@
+class Solution {
+    public int trap(int[] height) {
+        int leftmax[]=new int[height.length];
+        int rightmax[]=new int[height.length];
+        int lmax=0;
+        int rmax=0;
+        for(int i=0;i<height.length;i++){
+            leftmax[i]=Math.max(lmax,height[i]);
+            lmax=leftmax[i];
+        }
+        for(int i=height.length-1;i>=0;i--){
+            rightmax[i]=Math.max(rmax,height[i]);
+            rmax=rightmax[i];
+        }
+        int water=0;
+        for(int i=0;i<height.length;i++){
+            int trappedwater=Math.min(leftmax[i],rightmax[i])-height[i];
+            water+=trappedwater;
+        }
+        return water;
+    }
+}
